@@ -21,6 +21,30 @@
                         {{ session()->get('status') }}
                     </div>
                 @endif
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($categories as $category)
+                        <tr>
+                            <th scope="row">{{ $category->id }}</th>
+                            <td scope="row">{{ $category->name }}</td>
+                            <td scope="row"><a href="#" class="btn btn-warning">Edit</a></td>
+                            <td scope="row"><a href="" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="float-right">
+                    {{ $categories->links() }}
+                </div>
+
             </div>
         </div>
     </div>
