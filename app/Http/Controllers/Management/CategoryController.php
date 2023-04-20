@@ -97,6 +97,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::destroy($id);
+        session()->flash('status', 'The Category is Deleted Successfully');
+        return(redirect('/management/category'));
     }
 }

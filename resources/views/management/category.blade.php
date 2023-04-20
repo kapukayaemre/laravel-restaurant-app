@@ -36,7 +36,13 @@
                             <th scope="row">{{ $category->id }}</th>
                             <td>{{ $category->name }}</td>
                             <td><a href="{{ route("category.edit", ['category' => $category->id]) }}" class="btn btn-warning">Edit</a></td>
-                            <td><a href="" class="btn btn-danger">Delete</a></td>
+                            <td>
+                                <form action="{{ route("category.destroy", ['category' => $category->id]) }}" method="POST" >
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
