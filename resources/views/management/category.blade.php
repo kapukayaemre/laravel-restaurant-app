@@ -34,9 +34,9 @@
                     @foreach($categories as $category)
                         <tr>
                             <th scope="row">{{ $category->id }}</th>
-                            <td scope="row">{{ $category->name }}</td>
-                            <td scope="row"><a href="#" class="btn btn-warning">Edit</a></td>
-                            <td scope="row"><a href="" class="btn btn-danger">Delete</a></td>
+                            <td>{{ $category->name }}</td>
+                            <td><a href="{{ route("category.edit", ['category' => $category->id]) }}" class="btn btn-warning">Edit</a></td>
+                            <td><a href="" class="btn btn-danger">Delete</a></td>
                         </tr>
                     @endforeach
                     </tbody>
