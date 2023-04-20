@@ -14,7 +14,20 @@
             <div class="col-md-8">
                 Create a Category
                 <hr>
-                <form action="">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>
+                                    <button type="button" class="close" data-dismiss="alert">X</button>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route("category.store") }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label for="categoryName">Category Name</label>
                         <input type="text" name="name" class="form-control" placeholder="Category...">

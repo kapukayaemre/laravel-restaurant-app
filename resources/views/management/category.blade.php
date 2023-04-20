@@ -15,6 +15,12 @@
                 <i class="fas fa-align-justify"></i> Category
                 <a href="{{ route("category.create") }}" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> Create Category</a>
                 <hr>
+                @if(session()->has('status'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">X</button>
+                        {{ session()->get('status') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
