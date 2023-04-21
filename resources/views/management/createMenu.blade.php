@@ -37,13 +37,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="5"
-                                      class="form-control"></textarea>
-                        </div>
-
-
                         <label for="menuImage">Image</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -53,6 +46,12 @@
                                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile01">
                                 <label for="inputGroupFile01" class="custom-file-label">Choose File</label>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="5"
+                                      class="form-control"></textarea>
                         </div>
 
                         <div class="form-group">
