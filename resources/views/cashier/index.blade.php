@@ -23,6 +23,7 @@
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function () {
             // make table-detail hidden
@@ -55,31 +56,32 @@
             var SELECTED_TABLE_ID = "";
             var SELECTED_TABLE_NAME = "";
             // Detect button table onclick to show table data
-            $("#table-detail").on("click", ".btn-table", function () {
+            $("#table-detail").on("click", ".btn-table", function(){
                 SELECTED_TABLE_ID = $(this).data("id");
                 SELECTED_TABLE_NAME = $(this).data("name");
-                $("#selected-table").html('<br><h3>Table: ' + SELECTED_TABLE_NAME + '</h3><hr>');
+                $("#selected-table").html('<br><h3>Table: '+SELECTED_TABLE_NAME+'</h3><hr>');
+                $.get("/cashier/getSaleDetailsByTable/"+SELECTED_TABLE_ID, function(data){
+                    $("#order-detail").html(data);
+                });
             });
 
-            $("#list-menu").on("click", ".btn-menu", function (e) {
-                if (SELECTED_TABLE_ID == "") {
+            $("#list-menu").on("click", ".btn-menu", function(e){
+                if(SELECTED_TABLE_ID == ""){
                     alert("You need to select a table for the customer first");
-                } else {
+                }else{
                     var menu_id = $(this).data("id");
                     $.ajax({
                         type: "POST",
-                        data:{
-                            "_token": $('meta[name="csrf-token"]').attr("content"),
+                        data: {
+                            "_token" : $('meta[name="csrf-token"]').attr('content'),
                             "menu_id": menu_id,
                             "table_id": SELECTED_TABLE_ID,
                             "table_name": SELECTED_TABLE_NAME,
-                            "quantity": 1
+                            "quantity" : 1
                         },
-                        url:"/cashier/orderFood",
-                        success: function (data){
-
+                        url: "/cashier/orderFood",
+                        success: function(data){
                             $("#order-detail").html(data);
-
                         }
                     });
                 }

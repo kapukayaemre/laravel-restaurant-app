@@ -13,12 +13,11 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -28,8 +27,8 @@ Route::get('/management', function (){
 
 Route::get('/cashier', 'Cashier\CashierController@index');
 Route::get('/cashier/getMenuByCategory/{category_id}', 'Cashier\CashierController@getMenuByCategory');
+Route::get('/cashier/getSaleDetailsByTable/{table_id}', 'Cashier\CashierController@getSaleDetailsByTable');
 Route::get('/cashier/getTable', 'Cashier\CashierController@getTables');
-
 Route::post("/cashier/orderFood","Cashier\CashierController@orderFood");
 
 Route::resource('management/category','Management\CategoryController');
