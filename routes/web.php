@@ -33,6 +33,7 @@ Route::post("/cashier/orderFood","Cashier\CashierController@orderFood");
 Route::post("/cashier/deleteSaleDetail", "Cashier\CashierController@deleteSaleDetail");
 Route::post("/cashier/confirmOrderStatus", "Cashier\CashierController@confirmOrderStatus");
 Route::post("/cashier/savePayment", "Cashier\CashierController@savePayment");
+Route::get("/cashier/showReceipt/{saleID}", "Cashier\CashierController@showReceipt");
 
 Route::resource('management/category','Management\CategoryController');
 Route::resource('management/menu','Management\MenuController');
