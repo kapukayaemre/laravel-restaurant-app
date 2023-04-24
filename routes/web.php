@@ -15,34 +15,40 @@ use Illuminate\Support\Facades\Auth;
 */
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/management', function (){
-   return view('management.index');
+Route::middleware(['auth'])->group(function () {
+
+    // routes for cashier
+    Route::get('/cashier', 'Cashier\CashierController@index');
+    Route::get('/cashier/getMenuByCategory/{category_id}', 'Cashier\CashierController@getMenuByCategory');
+    Route::get('/cashier/getSaleDetailsByTable/{table_id}', 'Cashier\CashierController@getSaleDetailsByTable');
+    Route::get('/cashier/getTable', 'Cashier\CashierController@getTables');
+    Route::post("/cashier/orderFood", "Cashier\CashierController@orderFood");
+    Route::post("/cashier/deleteSaleDetail", "Cashier\CashierController@deleteSaleDetail");
+    Route::post("/cashier/confirmOrderStatus", "Cashier\CashierController@confirmOrderStatus");
+    Route::post("/cashier/savePayment", "Cashier\CashierController@savePayment");
+    Route::get("/cashier/showReceipt/{saleID}", "Cashier\CashierController@showReceipt");
 });
-// routes for cashier
-Route::get('/cashier', 'Cashier\CashierController@index');
-Route::get('/cashier/getMenuByCategory/{category_id}', 'Cashier\CashierController@getMenuByCategory');
-Route::get('/cashier/getSaleDetailsByTable/{table_id}', 'Cashier\CashierController@getSaleDetailsByTable');
-Route::get('/cashier/getTable', 'Cashier\CashierController@getTables');
-Route::post("/cashier/orderFood","Cashier\CashierController@orderFood");
-Route::post("/cashier/deleteSaleDetail", "Cashier\CashierController@deleteSaleDetail");
-Route::post("/cashier/confirmOrderStatus", "Cashier\CashierController@confirmOrderStatus");
-Route::post("/cashier/savePayment", "Cashier\CashierController@savePayment");
-Route::get("/cashier/showReceipt/{saleID}", "Cashier\CashierController@showReceipt");
+
+
+Route::middleware(['auth', 'VerifyAdmin'])->group(function () {
+
+    Route::get('/management', function () {
+        return view('management.index');
+    });
 
 // routes for management
-Route::resource('management/category','Management\CategoryController');
-Route::resource('management/menu','Management\MenuController');
-Route::resource('management/table','Management\TableController');
+    Route::resource('management/category', 'Management\CategoryController');
+    Route::resource('management/menu', 'Management\MenuController');
+    Route::resource('management/table', 'Management\TableController');
 
 // routes for report
-Route::get('/report', 'Report\ReportController@index');
-Route::get('/report/show', 'Report\ReportController@show');
+    Route::get('/report', 'Report\ReportController@index');
+    Route::get('/report/show', 'Report\ReportController@show');
 
 // Export to Excel
-Route::get('/report/show/export', 'Report\ReportController@export');
+    Route::get('/report/show/export', 'Report\ReportController@export');
+
+});
+

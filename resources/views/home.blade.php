@@ -15,13 +15,14 @@
                         @endif
 
                         <div class="row text-center">
-                            <div class="col-sm-4">
-                                <a href="/management">
-                                    <h4>Management</h4>
-                                    <img width="50px" src="{{ asset('images/management.png') }}"/>
-                                </a>
-                            </div>
-
+                            @if(Auth::user()->checkAdmin())
+                                <div class="col-sm-4">
+                                    <a href="/management">
+                                        <h4>Management</h4>
+                                        <img width="50px" src="{{ asset('images/management.png') }}"/>
+                                    </a>
+                                </div>
+                            @endif
                             <div class="col-sm-4">
                                 <a href="/cashier">
                                     <h4>Cashier</h4>
@@ -29,12 +30,14 @@
                                 </a>
                             </div>
 
-                            <div class="col-sm-4">
-                                <a href="/report">
-                                    <h4>Report</h4>
-                                    <img width="50px" src="{{ asset('images/report.png') }}"/>
-                                </a>
-                            </div>
+                            @if(Auth::user()->checkAdmin())
+                                <div class="col-sm-4">
+                                    <a href="/report">
+                                        <h4>Report</h4>
+                                        <img width="50px" src="{{ asset('images/report.png') }}"/>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
