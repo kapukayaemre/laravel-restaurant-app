@@ -43,3 +43,6 @@ Route::resource('management/table','Management\TableController');
 // routes for report
 Route::get('/report', 'Report\ReportController@index');
 Route::get('/report/show', 'Report\ReportController@show');
+
+// Export to Excel
+Route::get('/report/show/export', 'Report\ReportController@export');

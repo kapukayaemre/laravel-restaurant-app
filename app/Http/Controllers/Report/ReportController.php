@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Report;
 
 use App\Http\Controllers\Controller;
-use App\Sale;
 use Illuminate\Http\Request;
+use App\Sale;
+use App\Exports\SaleReportExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ReportController extends Controller
 {
@@ -29,4 +32,11 @@ class ReportController extends Controller
             ->with('totalSale', $sales->sum('total_price'))
             ->with('sales', $sales->paginate(5));
     }
+
+    public function export(Request $request)
+    {
+
+        return Excel::download(new SaleReportExport($request->dateStart, $request->dateEnd), 'saleReport.xlsx');
+    }
+
 }
